@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor / Crear agente</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container-fluid bg-secondary p-3">
+        <div class="container">
+            <div class="col-lg-3 d-flex justify-content-center">
+                <img src="{{ url_for('static', filename='/img/alloxentric_logo-3x.png') }}" style="width: 90%; height: 60%;" class="img-responsive" alt="">
+            </div>
+        </div>
+    </div>
+
+        <div class="container col-lg-4">
+            <form class="row g-3 mt-5 border border-secondary p-4 rounded" name="agent" action="/agent" method="POST">
+                <!--NOMBRE-->
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="name">
+                </div>
+                <!--APELLIDO-->
+                <div class="col-md-6">
+                    <label for="lastname" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" name="lastname">
+                </div>
+                <!--USUARIO-->
+                <div class="col-md-6">
+                    <label for="user" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" name="user">
+                </div>
+                <!--EMAIL-->
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email">
+                </div>
+                <!--TELEFONO-->
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Teléfono</label>
+                    <input type="number" class="form-control" name="phone">
+                </div>
+                <!--CONTRASEÑA-->
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <!--DIRECCIÓN-->
+                <div class="col-12">
+                    <label for="address" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" name="address" placeholder="1234 Main St">
+                </div>
+                <!--Tipo de documento-->
+                <div class="col-md-5 ">
+                    <label for="document_type" class="form-label">Tipo de documento</label>
+                    <select name="document_type" class="form-select">
+                        <option selected>RUT</option>
+                        <option selected>PASAPORTE</option>
+                    </select>
+                </div>
+                <!--Numero de documento-->
+                <div class="col-7 mt-3">
+                    <label for="document_number" class="form-label">Número de documento</label>
+                    <input type="text" class="form-control" name="document_number" placeholder="1234 Main St">
+                </div>
+                <!-- ROL-->
+                <div class="col-md-12 mt-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select name="rol" class="form-select">
+                        <option selected>Agente</option>
+                    </select>
+                </div>
+            
+
+                <!--GUARDAR AGENTE-->
+                <div class="col-12 mt-4 d-flex justify-content-center">
+                    <button type="submit" class="col-6 btn btn-primary p-3 bg-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div class="container col-md-12">
+            <div class="accordion mt-5" id="accordionExample">
+                <div class="accordion-item">
+                    {% for agent in agents %}
+                    <form action="/edit/{{agent.name}}" method="POST">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button bg-secondary text-light fs-5 text fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            {{agent.name}} {{agent.lastname}}
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </form>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script type = "text/javascript" src = "{{ url_for('static', filename = '/js/bootstrap.js') }}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
