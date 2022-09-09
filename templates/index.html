@@ -83,19 +83,46 @@
                 </div>
             </form>
         </div>
+
+
         <div class="container col-md-12">
             <div class="accordion mt-5" id="accordionExample">
                 <div class="accordion-item">
                     {% for agent in agents %}
-                    <form action="/edit/{{agent.name}}" method="POST">
+                    <form action="/edit/{{agent.name}}" name="agent" method="POST">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button bg-secondary text-light fs-5 text fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             {{agent.name}} {{agent.lastname}}
                             </button>
                         </h2>
+
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <div class="row col-md-12 accordion-body">
+                                <div class="col-md-5">
+                                    <small>USUARIO:</small>
+                                    <input type="text" class="form-control" value="{{agent.user}}" name="user">
+                                </div>
+                                <div class="col-md-5">
+                                    <small>EMAIL:</small>
+                                    <input type="text" class="form-control" value="{{agent.email}}" name="email">
+                                </div>
+
+                                <div class="col-2 mt-4 d-flex justify-content-center">
+                                    <button type="submit" class="col-6 btn btn-primary p-3 bg-success">EDITAR</button>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <small>TELÉFONO:</small>
+                                    <input type="text" class="form-control" value="{{agent.phone}}" name="phone">
+                                </div>
+                                <div class="col-md-5">
+                                    <small>DIRECCIÓN:</small>
+                                    <input type="text" class="form-control" value="{{agent.address}}" name="address">
+                                </div>
+                                <div class="col-md-5 mt-3">
+                                    <small> NÚMERO DE DOCUMENTO:</small>
+                                    <input type="text" class="form-control" value="{{agent.document_number}}" name="document_number">
+                                </div>
                             </div>
                         </div>
                     </form>
